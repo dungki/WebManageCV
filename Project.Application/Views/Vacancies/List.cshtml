@@ -1,0 +1,131 @@
+﻿@using Project.Core.Objects;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<Project.Core.Objects.Vacancy>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    User user = Session["Login"] as User;
+}
+
+<!-- ============================================================== -->
+<!-- pageheader -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="page-header">
+            <h2 class="pageheader-title">Vacancies Management</h2>
+            <div class="page-breadcrumb">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="@Url.Action("List","Vacancies")" class="breadcrumb-link">Vacancies</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">List Vacancies</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- end pageheader -->
+<!-- ============================================================== -->
+@using (Html.BeginForm())
+{
+    <input type="search" placeholder="Search by name" name="search" required />
+    <input type="submit" value="Search" />
+}
+<br />
+<p>
+    @Html.ActionLink("Create New", "Create") || @Html.ActionLink("Open", "StatusDoing") || @Html.ActionLink("Suspended", "StatusPause") || @Html.ActionLink("Close", "StatusStop") || @Html.ActionLink("Owner", "Owner")
+</p>
+<hr />
+<table class="table">
+    <tr>
+        <th>
+            Department
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Language
+        </th>
+        <th>
+            Location
+        </th>
+        <th>
+            Salary
+        </th>
+        <th>
+            Experience
+        </th>
+        <th>
+            Posted
+        </th>
+
+        @*<th></th>*@
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @((item.Status == 0)?"Open":(item.Status==1)? "Suspended" : "Close")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Language)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Experience)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Posted)
+            </td>
+            <td>
+                @if (user != null && item.Status != 2)
+                {
+                    if (item.CreateBy == user.Id)
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id });
+                    }
+                }
+                @Html.ActionLink("Details", "DetailsVacancy", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+@if (ViewBag.Title == "List")
+{
+    @Html.PagedListPager(Model, Page => Url.Action("List", new { Page }))
+}
+else if (ViewBag.Title == "StatusDoing")
+{
+    @Html.PagedListPager(Model, Page => Url.Action("StatusDoing", new { Page }))
+}
+else if (ViewBag.Title == "StatusPause")
+{
+    @Html.PagedListPager(Model, Page => Url.Action("StatusPause", new { Page }))
+}
+else if (ViewBag.Title == "StatusStop")
+{
+    @Html.PagedListPager(Model, Page => Url.Action("StatusStop", new { Page }))
+}
+else if (ViewBag.Title == "Owner")
+{
+    @Html.PagedListPager(Model, Page => Url.Action("Owner", new { Page }))
+}

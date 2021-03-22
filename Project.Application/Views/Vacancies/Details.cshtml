@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Client.cshtml";
+}
+@model Project.Core.Objects.Vacancy
+<!-- breadcrumbs -->
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb d-flex justify-content-center bg-theme">
+        <li class="breadcrumb-item">
+            <a href="index.html" class="text-white">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="@Url.Action("Index", "Vacancies")" class="text-white">Job List</a>
+        </li>
+    </ol>
+</nav>
+<!-- //breadcrumbs -->
+<!-- job description -->
+<section class="employ-sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9  mx-auto" id="job-desc">
+                <div class="title-sec-w3layouts_pvt text-center pb-4">
+                    <span class="title-wthree">a world full of possibilities</span>
+                    <h4 class="w3layouts_pvt-head">allowing you to expand quickly.</h4>
+                    <p class="my-lg-4 mt-4 js_txt">
+                        Donec consequat sapien ut leo cursus rhoncus. Nullam dui mi, vulputate
+                        ac
+                        metus at, semper
+                        varius orci. Nulla accumsan
+                        ac elit in congue. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+                        inceptos Class aptent taciti
+                        sociosqu ad litora s aptent taciti sociosqu ad litora torquent per torquent p himenaeos.
+                    </p>
+                    <a href="#job-desc" class="btn wthree-bnr-btn scroll ">Read more</a>
+                </div>
+                <div class="e-left pt-lg-5">
+                    <hr>
+                    <div class="e-desc">
+                        <div class="job-desc-w3ls">
+                            <ul>
+                                <h4 class="w3layouts_pvt-head"><i class="fa fa-check-circle" aria-hidden="true"></i> @TempData["StatusMessage"]</h4>
+                                <li>Has registered to apply : <strong>@Model.VacancyApplicants.Count() People</strong></li>
+                                <li>Role: <strong>@Html.DisplayFor(model => model.Name)</strong></li>
+                                <li>Industry: <strong>Sortware</strong></li>
+                                <li>Company size: <strong> 5k-10k People</strong></li>
+                                <li>Job type: <strong>Permanent</strong></li>
+                                <li>Experience level: <strong>@Html.DisplayFor(model => model.Experience)</strong></li>
+                                <li>Salary: <strong>@Html.DisplayFor(model => model.Salary)</strong></li>
+                                <li>Location: <strong>@Html.DisplayFor(model => model.Location)</strong></li>
+                            </ul>
+                        </div>
+                        <hr>
+                        <div class="tech-job">
+                            <h5 class="w3layouts_pvt-head">technologies included.</h5>
+                            <ul class="e-tags">
+                                <li>@Html.DisplayFor(model => model.Language)</li>
+
+                            </ul>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="job-role">
+                    <h5 class="w3layouts_pvt-head">get to know the role</h5>
+                    <p>
+                        @Html.DisplayFor(model => model.Description)
+                    </p>
+                    <div class=" job-desc-w3ls">
+                        <ul class="mt-3">
+                            <li>
+                                <i class="fa fa-angle-right mr-3"></i>Cras justo odio
+                            </li>
+                            <li>
+                                <i class="fa fa-angle-right mr-3"></i>Dapibus ac facilisis in
+                            </li>
+                            <li>
+                                <i class="fa fa-angle-right mr-3"></i>Morbi leo risus
+                            </li>
+                            <li>
+                                <i class="fa fa-angle-right mr-3"></i>Porta ac consectetur ac
+                            </li>
+                            <li>
+                                <i class="fa fa-angle-right  mr-3"></i>Vestibulum at eros
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <a href="@Url.Action("Create", "Applicants", new { id = Model.Id })" class="btn wthree-bnr-btn text-capitalize">
+                    Apply for job
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<!-- //job description -->
+<!-- Footer -->
+

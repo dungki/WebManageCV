@@ -1,0 +1,26 @@
+﻿@using Project.Core.Objects;
+@{
+    User user = Session["Login"] as User;
+}
+
+@if (user == null || user.TypeUserId!=1)
+{
+    <script>
+        window.location.href = "Error";
+    </script>
+}
+else
+{
+    <div class="dropdown pr-2">
+        <button class="btn btn-default dropdown-toggle" style="color:black" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @user.Name
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="@Url.Action("Profile","Default",new {id=user.Id })"><i class="fas fa-user mr-2"></i>Account</a>
+            <a class="dropdown-item" href="@Url.Action("Logout","Login")"><i class="fas fa-power-off mr-2"></i>Log out</a>
+        </div>
+    </div>
+}
+
+
+

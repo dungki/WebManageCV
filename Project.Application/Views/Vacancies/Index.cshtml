@@ -1,0 +1,101 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<Project.Core.Objects.Vacancy>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Client.cshtml";
+}
+
+<!-- breadcrumbs -->
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb d-flex justify-content-center bg-theme">
+        <li class="breadcrumb-item">
+            <a href="@Url.Action("Index", "Home")" class="text-white">Home</a>
+        </li>
+        <li class="breadcrumb-item active text-white font-weight-bold" aria-current="page">Vacancy</li>
+    </ol>
+</nav>
+<!-- //breadcrumbs -->
+<!-- jobs -->
+<section class="employ-sec">
+    <div class="container">
+        <div class="title-sec-w3layouts_pvt text-center pb-4">
+            <span class="title-wthree">a world full of possibilities</span>
+            <h4 class="w3layouts_pvt-head">allowing you to expand quickly.</h4>
+        </div>
+        <div class="row pt-lg-5">
+            <div class="col-lg-4">
+                <div class="left_widget">
+                    <h3 class="left-widget-job">
+                        Search Vacancy
+                    </h3>
+                    @using (Html.BeginForm())
+                    {
+                        <input type="text" class="form-control my-3" placeholder="Search" name="search" required>
+                        <select class="form-control my-3" name="option" required>
+                            <option value="0">Search By</option>
+                            <option value="Name">Name</option>
+                            <option value="Language">Language</option>
+                            <option value="Location">Location</option>
+                            <option value="Salary">Salary</option>
+                            <option value="Experience">Experience</option>
+                        </select>
+                        <input type="submit" value="submit" class="form-control bg-theme " style="color:white">
+                    }
+
+
+                </div>
+                
+            </div>
+            <div class="col-lg-8">
+                <div class="row">
+
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-sm-6 e-left">
+                            <div class="e-desc">
+                                <h6><a href="@Url.Action("Details", "Vacancies", new { id = item.Id })">@Html.DisplayFor(modelItem => item.Name)</a></h6>
+                                <ul class="e-tags">
+                                    <li>
+                                        @Html.DisplayFor(modelItem => item.Language)
+                                    </li>
+                                </ul>
+                                <hr>
+                                <ul class="desc-list">
+                                    <li>
+                                        <span>Location:</span>
+                                        @Html.DisplayFor(modelItem => item.Location)
+                                    </li>
+                                    <li>
+                                        <span>Salary:</span>
+                                        @Html.DisplayFor(modelItem => item.Salary)
+                                    </li>
+                                    <li>
+                                        <span>Experience</span>
+                                        @Html.DisplayFor(modelItem => item.Experience)
+                                    </li>
+                                    <li>
+                                        <span>Posted: </span>
+                                        @String.Format("{0:dddd, dd MMM yyyy}", item.Posted)
+                                    </li>
+                                    
+
+                                </ul>
+                                <a href="@Url.Action("Create", "Applicants", new {id = item.Id })" class="btn wthree-bnr-btn text-capitalize">
+                                    Apply for job
+                                </a>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="d-flex justify-content-center">
+        @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))
+    </div>
+    </div>
+</section>
+<!-- //jobs -->
+<!-- Footer -->

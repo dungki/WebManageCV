@@ -1,0 +1,49 @@
+﻿@model Project.Core.Objects.User
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Profile</h2>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <i class="fa fa-shield" aria-hidden="true"></i> Position
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TypeUser.Name)
+        </dd>
+        <hr />
+        <dt>
+            <i class="fa fa-user" aria-hidden="true"></i> Full Name
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <hr />
+        <dt>
+            <i class="fa fa-birthday-cake" aria-hidden="true"></i> Birthday
+        </dt>
+        <dd>
+            @String.Format("{0:dddd, dd MMM yyyy}", Model.Birthday)
+
+        </dd>
+        <hr />
+        <dt>
+            <i class="fa fa-envelope" aria-hidden="true"></i> Email
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+    </dl>
+</div>
+<hr />
+<p>
+    @Html.ActionLink("Edit Profile", "Edit", new { id = Model.Id })
+</p>

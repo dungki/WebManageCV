@@ -1,0 +1,87 @@
+﻿@model Project.Core.Objects.VacancyApplicant
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ============================================================== -->
+<!-- pageheader -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="page-header">
+            <h2 class="pageheader-title">Interview Censorship</h2>
+            <div class="page-breadcrumb">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="@Url.Action("InterviewCensorship","VacancyApplicant")" class="breadcrumb-link">Interview Censorship</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Details</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- end pageheader -->
+<!-- ============================================================== -->
+
+<div>
+    <h4>Interview</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Applicant.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Applicant.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Interview.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Interview.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vacancy.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vacancy.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InterviewTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InterviewTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateAt)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index", "Interviews")
+</p>
